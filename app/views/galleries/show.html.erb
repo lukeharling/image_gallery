@@ -1,0 +1,30 @@
+<h1 class="text-3xl font-bold mb-4"><%= @gallery.title %></h1>
+
+<p class="mb-4"><%= @gallery.description %></p>
+
+<% if @gallery.user == current_user %>
+  <div class="space-x-2 mb-4">
+    <%= link_to "Edit", edit_gallery_path(@gallery), class: "bg-yellow-500 text-white px-3 py-1 rounded" %>
+    <%= link_to "Delete", @gallery, method: :delete, data: { confirm: "Are you sure?" }, class: "bg-red-600 text-white px-3 py-1 rounded" %>
+    <%= link_to "Upload Photo", new_gallery_photo_path(@gallery), class: "bg-green-600 text-white px-3 py-1 rounded" %>
+  </div>
+<% end %>
+
+<hr class="my-6">
+
+<h2 class="text-xl font-semibold mb-4">Photos</h2>
+
+<% if @gallery.photos.any? %>
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <% @gallery.photos.each do |photo| %>
+      <div class="border rounded p-2">
+        <% if photo.image.attached? %>
+          <%= image_tag photo.image.variant(resize_to_limit: [300, 300]), class: "rounded" %>
+        <% end %>
+        <p class="text-gray-700 mt-2"><%= photo.caption %></p>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="text-gray-500">No photos uploaded yet.</p>
+<% end %>
