@@ -24,8 +24,21 @@
   </head>
 
   <body>
+    <!-- Flash messages -->
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
+    <!-- Devise auth links -->
+    <% if user_signed_in? %>
+      <p>Signed in as <%= current_user.email %></p>
+      <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to "Sign up", new_user_registration_path %>
+      <%= link_to "Login", new_user_session_path %>
+    <% end %>
+
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>
     </main>
-  </body>
+</body>
 </html>
