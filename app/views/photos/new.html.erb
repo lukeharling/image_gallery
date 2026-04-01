@@ -1,0 +1,15 @@
+<h1 class="text-2xl font-bold mb-4">Upload Photo</h1>
+
+<%= form_with model: [@gallery, @photo], local: true do |form| %>
+  <div class="mb-4">
+    <%= form.label :caption %>
+    <%= form.text_field :caption, class: "border p-2 w-full" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :image %>
+    <%= form.file_field :image, class: "border p-2 w-full" %>
+  </div>
+
+  <%= form.submit "Upload Photo", class: "bg-blue-600 text-white px-4 py-2 rounded" %>
+<% end %>
