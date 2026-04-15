@@ -1,7 +1,7 @@
 class PhotosController < ApplicationController
   before_action :authenticate_user!
   before_action :set_gallery
-  before_action :set_photo, only: [:destroy]
+  before_action :set_photo, only: [:edit, :update,:destroy]
 
   def new
     @photo = @gallery.photos.new
@@ -16,12 +16,23 @@ class PhotosController < ApplicationController
     end
   end
 
-  def destroy
-    @photo.destroy
-    redirect_to @gallery, notice: "Photo deleted."
+  def edit
   end
 
-  private
+  def update
+    if @photo.update(photo_params)
+      redirect_to gallery_path(@gallery), notice: "Photo updated successfully."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @photo.destroy
+    redirect_to gallery_path(@gallery), notice: "Photo deleted."
+  end
+
+private
 
   def set_gallery
     @gallery = current_user.galleries.find(params[:gallery_id])

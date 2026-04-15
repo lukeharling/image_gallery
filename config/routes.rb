@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :galleries do
-    resources :photos, only: [:new, :create, :destroy]
+    resources :photos, only: [:new, :create, :edit, :update, :destroy]
   end
 
   root "galleries#index"

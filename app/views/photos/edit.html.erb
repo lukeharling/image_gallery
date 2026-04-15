@@ -1,0 +1,20 @@
+<h1 class="text-2xl font-semibold mb-4">Edit Photo</h1>
+
+<%= form_with model: [@gallery, @photo], local: true, class: "space-y-6" do |f| %>
+
+  <div>
+    <%= f.label :caption, class: "block font-medium mb-1" %>
+    <%= f.text_field :caption, class: "w-full border rounded p-2" %>
+  </div>
+
+  <div>
+    <p class="font-medium mb-1">Current Image:</p>
+    <%= image_tag @photo.image, class: "w-48 rounded shadow mb-3" %>
+
+    <%= f.label :image, "Replace Image", class: "block font-medium mb-1" %>
+    <%= f.file_field :image, class: "w-full" %>
+  </div>
+
+  <%= f.submit "Save Changes", class: "bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" %>
+
+<% end %>
