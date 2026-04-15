@@ -1,7 +1,9 @@
 # Be sure to restart your server when you modify this file.
 
-# Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = "1.0"
 
-# Add additional assets to the asset load path.
-# Rails.application.config.assets.paths << Emoji.images_path
+# Register the Tailwind build directory
+Rails.application.config.assets.paths << Rails.root.join("app/assets/tailwind")
+
+# Tell Rails to use Tailwind as the CSS compressor
+Rails.application.config.assets.css_compressor = :tailwindcss
