@@ -81,13 +81,5 @@ This project uses MiniMagick for image processing.
 
 ---
 
-## License
-
-MIT License (or choose a different license later)
-
----
-
-## Contributing
-
-This is a personal learning project, but suggestions and improvements are welcome.
-
+### Note on running in Production Mode (Windows Only)
+I had problems running production mode on Windows using Rails 8's default asset pipeline (Propshaft) doesn't support production mode. I've been told by Copilot that this won't be a problem for Linux/MacOS users so hopfully it should be fine. The app does work fully in development mode (if production doesn't work) apart from the custom error pages which I haven't been able to test (but I believe should work).

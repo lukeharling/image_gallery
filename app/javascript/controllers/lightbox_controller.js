@@ -17,11 +17,22 @@ export default class extends Controller {
     this.showImage(url)
 
     this.overlayTarget.style.display = "block"
+    this.startSlideshow()
   }
 
   close() {
     this.overlayTarget.style.display = "none"
     this.imageTarget.src = ""
+    this.stopSlideshow()
+  }
+
+  startSlideshow() {
+    this.stopSlideshow()
+    this.timer = setInterval(() => this.next(), 3000)
+  }
+
+  stopSlideshow() {
+    if (this.timer) clearInterval(this.timer)
   }
 
   showImage(url) {
