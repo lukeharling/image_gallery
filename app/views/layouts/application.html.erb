@@ -5,46 +5,55 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
 
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body class="bg-gray-100 min-h-screen">
 
-    <!-- Navbar -->
-    <nav class="bg-white shadow mb-8">
-      <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
-        <%= link_to "Image Gallery", root_path, class: "text-xl font-semibold" %>
+    <!-- ONE controller wrapping EVERYTHING -->
+    <div data-controller="lightbox"
+         data-lightbox-images-value="<%= lightbox_images.to_json %>">
 
-        <div class="flex items-center gap-4">
-          <% if user_signed_in? %>
-            <%= link_to "My Galleries", galleries_path, class: "text-gray-700 hover:text-black" %>
-            <%= link_to "New Gallery", new_gallery_path, class: "text-gray-700 hover:text-black" %>
-            <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "text-red-600 hover:text-red-700" %>
-          <% else %>
-            <%= link_to "Login", new_user_session_path, class: "text-gray-700 hover:text-black" %>
-            <%= link_to "Sign Up", new_user_registration_path, class: "text-gray-700 hover:text-black" %>
-          <% end %>
+      <!-- Navbar -->
+      <nav class="bg-white shadow mb-8">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+          <%= link_to "Image Gallery", root_path, class: "text-xl font-semibold" %>
+
+          <div class="flex items-center gap-4">
+            <% if user_signed_in? %>
+              <%= link_to "My Galleries", galleries_path, class: "text-gray-700 hover:text-black" %>
+              <%= link_to "New Gallery", new_gallery_path, class: "text-gray-700 hover:text-black" %>
+              <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "text-red-600 hover:text-red-700" %>
+            <% else %>
+              <%= link_to "Login", new_user_session_path, class: "text-gray-700 hover:text-black" %>
+              <%= link_to "Sign Up", new_user_registration_path, class: "text-gray-700 hover:text-black" %>
+            <% end %>
+          </div>
         </div>
+      </nav>
+
+      <!-- Flash messages -->
+      <div class="max-w-5xl mx-auto px-4">
+        <% flash.each do |key, value| %>
+          <div class="mb-4 p-3 rounded 
+            <%= key == 'notice' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' %>">
+            <%= value %>
+          </div>
+        <% end %>
       </div>
-    </nav>
 
-    <!-- Flash messages -->
-    <div class="max-w-5xl mx-auto px-4">
-      <% flash.each do |key, value| %>
-        <div class="mb-4 p-3 rounded 
-          <%= key == 'notice' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' %>">
-          <%= value %>
-        </div>
-      <% end %>
-    </div>
+      <!-- Main content (thumbnails live here) -->
+      <div class="max-w-5xl mx-auto px-4">
+        <%= yield %>
+      </div>
 
-    <!-- Main content -->
-    <div class="max-w-5xl mx-auto px-4">
-      <%= yield %>
-    </div>
+      <!-- Render the lightbox overlay -->
+      <%= render "shared/lightbox" %>
+
+    </div> <!-- END controller wrapper -->
 
   </body>
 </html>

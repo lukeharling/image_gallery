@@ -1,0 +1,29 @@
+<div data-lightbox-target="overlay"
+     style="display:none; background: rgba(0, 0, 0, 0.8);"
+     class="fixed inset-0 z-50">
+
+  <!-- Close button -->
+  <button data-action="click->lightbox#close"
+          class="absolute top-6 right-6 text-white text-4xl font-bold hover:text-gray-300">
+    &times;
+  </button>
+
+  <!-- Left arrow -->
+  <button data-action="click->lightbox#prev"
+          class="absolute left-6 top-1/2 -translate-y-1/2 text-white text-5xl font-bold hover:text-gray-300">
+    &#10094;
+  </button>
+
+  <!-- Image container -->
+  <div class="w-full h-full flex items-center justify-center pointer-events-none">
+    <img data-lightbox-target="image"
+         class="max-h-[90vh] max-w-[90vw] rounded shadow-lg pointer-events-auto" />
+  </div>
+
+  <!-- Right arrow -->
+  <button data-action="click->lightbox#next"
+          class="absolute right-6 top-1/2 -translate-y-1/2 text-white text-5xl font-bold hover:text-gray-300">
+    &#10095;
+  </button>
+
+</div>
