@@ -40,6 +40,7 @@ export default class extends Controller {
   }
 
   next() {
+    clearInterval(this.timer)
     this.indexValue = (this.indexValue + 1) % this.imagesValue.length
     this.showImage(this.imagesValue[this.indexValue])
   }
