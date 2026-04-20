@@ -40,14 +40,17 @@ export default class extends Controller {
   }
 
   next() {
-    clearInterval(this.timer)
-    this.indexValue = (this.indexValue + 1) % this.imagesValue.length
-    this.showImage(this.imagesValue[this.indexValue])
-  }
+  this.stopSlideshow()
+  this.indexValue = (this.indexValue + 1) % this.imagesValue.length
+  this.showImage(this.imagesValue[this.indexValue])
+  this.startSlideshow()
+}
 
-  prev() {
-    this.indexValue =
-      (this.indexValue - 1 + this.imagesValue.length) % this.imagesValue.length
-    this.showImage(this.imagesValue[this.indexValue])
-  }
+prev() {
+  this.stopSlideshow()
+  this.indexValue =
+    (this.indexValue - 1 + this.imagesValue.length) % this.imagesValue.length
+  this.showImage(this.imagesValue[this.indexValue])
+  this.startSlideshow()
+}
 }
